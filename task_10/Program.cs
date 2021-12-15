@@ -9,7 +9,7 @@ namespace task_10
             while (true)
             {
                 bool mistake = false;   //есть ошибка?
-                Console.WriteLine("Вас приветствует программа перевода углов(градусы, минуты, секунды) в десятичные углы.");
+                Console.WriteLine("Вас приветствует программа перевода углов(градусы, минуты, секунды) в радианы.");
                 Angle angle1 = new Angle(); //создаем экземпляр класса
                 Console.WriteLine("Введите число градусов:");
                 try
@@ -23,16 +23,16 @@ namespace task_10
                     Console.WriteLine("Программа закрыта из-за ошибки.");
                     Console.WriteLine();
                 }
-                if (mistake == false)   
+                if (mistake == false)
                 {
                     Console.WriteLine("Введите число минут:");
                     try
                     {
                         angle1.min = Convert.ToDouble(Console.ReadLine());  //считываем число минут
-                        if (angle1.min < 0) //если число минут отрицательно
+                        if (angle1.min < 0 || angle1.min >= 60) //если число минут отрицательно или больше 60
                         {
                             mistake = true;
-                            Console.WriteLine("Число минут не может быть отрицательно.");
+                            Console.WriteLine("Число минут не может быть отрицательно и должно быть меньше 60.");
                             Console.WriteLine("Программа закрыта из-за ошибки.");
                             Console.WriteLine();
                         }
@@ -51,10 +51,10 @@ namespace task_10
                     try
                     {
                         angle1.sec = Convert.ToDouble(Console.ReadLine());  //считываем число секунд
-                        if (angle1.sec < 0) //если число секунд отрицательно
+                        if (angle1.sec < 0 || angle1.sec >= 60) //если число секунд отрицательно или больше 60
                         {
                             mistake = true;
-                            Console.WriteLine("Число секунд не может быть отрицательно.");
+                            Console.WriteLine("Число секунд не может быть отрицательно и должно быть меньше 60.");
                             Console.WriteLine("Программа закрыта из-за ошибки.");
                             Console.WriteLine();
                         }
@@ -93,11 +93,11 @@ namespace task_10
         {
             if (gradus >= 0)
             {
-                Console.WriteLine("Десятичное значение угла: {0}", gradus + min / 60 + sec / 3600); //если угол положительный
+                Console.WriteLine("Десятичное значение угла: {0}", (gradus + min / 60 + sec / 3600) * Math.PI / 180); //если угол положительный
             }
             else
             {
-                Console.WriteLine("Десятичное значение угла: {0}", gradus - min / 60 - sec / 3600); //если угол отрицательный
+                Console.WriteLine("Десятичное значение угла: {0}", (gradus - min / 60 - sec / 3600) * Math.PI / 180); //если угол отрицательный
             }
         }
     }
